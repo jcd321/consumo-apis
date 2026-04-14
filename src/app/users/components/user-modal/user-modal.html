@@ -1,0 +1,23 @@
+<div class="modal-overlay">
+    <div class="modal-content">
+        <h3>{{ user ? 'Editar Usuario' : 'Crear Nuevo Usuario' }}</h3>
+        <form (submit)="onSubmit()">
+            <div class="form-group">
+                <label>Nombre:</label>
+                <input type="text" [(ngModel)]="newUser().nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" [(ngModel)]="newUser().email" name="mail" required>
+            </div>
+            <div class="form-group">
+                <label>Edad:</label>
+                <input type="number" [(ngModel)]="newUser().edad" name="edad" required>
+            </div>
+            <div class="modal-buttons">
+                <button type="button" class="btn-cancel" (click)="onClose()">Cancelar</button>
+                <button type="submit" class="btn-save">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="title-container">
+
+    <div class="header">
+
+    <div class="header-left">
+        <h2>Listado de Títulos</h2>
+
+    <div class="search-id">
+        <input
+            type="number"
+            placeholder="Ingrese ID"
+            #idInput
+        />
+
+        <button (click)="getTitleId(+idInput.value)">
+            Buscar
+        </button>
+    </div>
+
+    </div>
+
+    <div class="actions">
+        <button class="btn-create">
+        Crear
+        </button>
+
+        <button class="btn-delete">
+        Eliminar
+        </button>
+    </div>
+
+</div>
+
+    <div class="cards">
+        @for (title of titles(); track title.id) {
+            <div class="card">
+            <h3 class="card-title">
+                {{ title.title }}
+            </h3>
+
+            <p class="card-body">
+                {{ title.body }}
+            </p>
+
+            <div class="card-info">
+                <span>Usuario: {{ title.userId }}</span>
+                <span>ID: {{ title.id }}</span>
+            </div>
+            </div>
+        }
+    </div>
+
+</div>

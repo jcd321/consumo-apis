@@ -1,0 +1,64 @@
+<div class="User-container">
+    <div class="header">
+        <div class="header-left">
+            <h2>Listado de Usuarios</h2>
+            <div class="search-id"> 
+                <input
+                    type="number"
+                    placeholder="Ingrese ID"
+                    #idInput
+                />
+                <button (click)="getUserById(+idInput.value)">
+                    Buscar
+                </button>
+            </div>
+        </div>
+
+    <div class="actions">
+        <button class="btn-create" (click)="isModalOpen.set(true)">
+        Crear
+        </button>
+    </div>          
+</div>
+
+<div class="cards">
+    @if(users().length === 0) {
+        <p>No hay usuarios cargados</p>
+    }
+
+    @for (user of users(); track user.id) {
+        <div class="card">
+            <h3 class="card-title">
+                {{ user.nombre || '(sin nombre)' }}
+            </h3>
+            <p class="card-body">
+                <strong>Email:</strong> {{ user.email || '(sin email)' }}
+            </p>
+            <p class="card-age">
+                <strong>Edad:</strong> {{ user.edad || '-' }}
+            </p>
+            <div class="card-info">
+                <span>ID de Usuario: {{ user.id }}</span>
+            </div>
+            <div class="card-actions">
+                <button class="btn-edit-card" (click)="editUser(user)">
+                    Editar
+                </button>
+                <button class="btn-delete-card" (click)="deleteUser(user.id)">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+@if (isModalOpen()) {
+    <app-user-modal 
+        [user]="editingUser()"
+        (close)="isModalOpen.set(false); editingUser.set(null)" 
+        (save)="editingUser() ? updateUser($event) : createUser($event)">
+    </app-user-modal>
+}
+
+
+

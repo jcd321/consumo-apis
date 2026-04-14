@@ -1,0 +1,67 @@
+<div class="Product-container">
+    <div class="header">
+        <div class="header-left">
+            <h2>Listado de Productos</h2>
+            <div class="search-id">
+                <input
+                    type="number"
+                    placeholder="Ingrese ID"
+                    #idInput
+                />
+                <button (click)="getProductById(+idInput.value)">
+                    Buscar
+                </button>
+            </div>
+        </div>
+
+    <div class="actions">
+        <button class="btn-create" (click)="isModalOpen.set(true)">
+        Crear
+        </button>
+    </div>
+</div>
+
+<div class="cards">
+    @if(products().length === 0) {
+        <p>No hay productos cargados</p>
+    }
+
+    @for (product of products(); track product.id) {
+        <div class="card">
+            <h3 class="card-title">
+                {{ product.nombre || '(sin nombre)' }}
+            </h3>
+            <p class="card-body">
+                <strong>Descripción:</strong> {{ product.descripcion || '(sin descripción)' }}
+            </p>
+            <p class="card-price">
+                <strong>Precio:</strong> {{ product.precio || '-' }}
+            </p>
+            <p class="card-stock">
+                <strong>Stock:</strong> {{ product.stock || '-' }}
+            </p>
+            <p class="card-category">
+                <strong>Categoría:</strong> {{ product.categoria || '(sin categoría)' }}
+            </p>
+            <div class="card-info">
+                <span>ID de Producto: {{ product.id }}</span>
+            </div>
+            <div class="card-actions">
+                <button class="btn-edit-card" (click)="editProduct(product)">
+                    Editar
+                </button>
+                <button class="btn-delete-card" (click)="deleteProduct(product.id)">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+@if (isModalOpen()) {
+    <app-product-modal
+        [product]="editingProduct()"
+        (close)="isModalOpen.set(false); editingProduct.set(null)"
+        (save)="editingProduct() ? updateProduct($event) : createProduct($event)">
+    </app-product-modal>
+}
