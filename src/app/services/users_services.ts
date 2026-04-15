@@ -9,7 +9,7 @@ import { User } from "../models/user_models";
 
 export class UsersServices{
     private readonly http = inject(HttpClient);
-    private readonly apiUrl = 'http://127.0.0.1:8000/users';
+    private readonly apiUrl = 'https://backend-consumo-api-sroi.onrender.com/users';
 
     getUsers(): Observable<User[]>{
         return this.http.get<User[]>(this.apiUrl).pipe(

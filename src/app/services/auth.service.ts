@@ -12,7 +12,7 @@ import { User } from "../models/user_models";
 
 export class AuthService {
     private readonly http = inject(HttpClient);
-    private readonly apiUrl = 'http://127.0.0.1:8000';
+    private readonly apiUrl = 'https://backend-consumo-api-sroi.onrender.com';
 
     login(credentials: LoginRequest): Observable<Token> {
         return this.http.post<Token>(`${this.apiUrl}/auth/login`, credentials).pipe(

@@ -9,7 +9,7 @@ import { Product } from "../models/product.models";
 
 export class ProductsService{
     private readonly http = inject(HttpClient);
-    private readonly apiUrl = 'http://127.0.0.1:8000/products';
+    private readonly apiUrl = 'https://backend-consumo-api-sroi.onrender.com/products';
 
     getProducts(): Observable<Product[]>{
         return this.http.get<Product[]>(this.apiUrl).pipe(
